@@ -1,6 +1,6 @@
-const width = 1000;
-const height = 500;
-const margin = 30;
+const width = 1200;
+const height = 600;
+const margin = 40;
 const svg  = d3.select('#scatter-plot')
             .attr('width', width)
             .attr('height', height);
@@ -21,12 +21,10 @@ const y = d3.scaleLinear().range([height-margin, margin]);
 const xLable = svg.append('text').attr('transform', `translate(${width/2}, ${height})`);
 const yLable = svg.append('text').attr('transform', `translate(${margin/2}, ${height/2}) rotate(-90)`);
 
-alert(xLable);
-alert(yLable);
 
 // Part 1: similar to rows above, set the 'transform' attribute for axis
-const xAxis = svg.append('g') // .attr('transform', ...
-const yAxis = svg.append('g')// .attr('transform', ...
+const xAxis = svg.append('g').call(d3.axisBottom(x));
+const yAxis = svg.append('g').call(d3.axisLeft(y));
 
 
 // Part 2: define color and radius scales
