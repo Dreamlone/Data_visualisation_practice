@@ -21,8 +21,11 @@ const y = d3.scaleLinear().range([height-margin, margin]);
 const xLable = svg.append('text').attr('transform', `translate(${width/2}, ${height})`);
 const yLable = svg.append('text').attr('transform', `translate(${margin/2}, ${height/2}) rotate(-90)`);
 
+alert(xLable);
+alert(yLable);
+
 // Part 1: similar to rows above, set the 'transform' attribute for axis
-const xAxis = svg.append('g') // .attr('transform', ... 
+const xAxis = svg.append('g') // .attr('transform', ...
 const yAxis = svg.append('g')// .attr('transform', ...
 
 
@@ -77,11 +80,11 @@ loadData().then(data => {
         x.domain([d3.min(xRange), d3.max(xRange)]);
 
         // call for axis
-        //xAxis.call(d3.axisBottom(x));    
+        //xAxis.call(d3.axisBottom(x));
 
         // Part 1: create 'y axis' similary to 'x'
         // ...
-        
+
         // Part 2: change domain of new scale
         // ...
 
@@ -96,7 +99,7 @@ loadData().then(data => {
 
 async function loadData() {
     const population = await d3.csv('data/pop.csv');
-    const rest = { 
+    const rest = {
         'gdp': await d3.csv('data/gdppc.csv'),
         'child-mortality': await d3.csv('data/cmu5.csv'),
         'life-expectancy': await d3.csv('data/life_expect.csv'),
@@ -109,7 +112,7 @@ async function loadData() {
             region: d.region,
             population: {...d},
             ...Object.values(rest).map(v=>v.find(r=>r.geo===d.geo)).reduce((o, d, i)=>({...o, [Object.keys(rest)[i]]: d }), {})
-            
+
         }
     })
     return data
