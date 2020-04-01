@@ -21,8 +21,8 @@ const xLable = svg.append('text').attr('transform', `translate(${width/2}, ${hei
 const yLable = svg.append('text').attr('transform', `translate(${margin/2}, ${height/2}) rotate(-90)`);
 
 // Part 1: similar to rows above, set the 'transform' attribute for axis
-const xAxis = svg.append('g').attr('transform', `translate(0, 500)`);
-const yAxis = svg.append('g').attr('transform', `translate(0, 70)`);
+const xAxis = svg.append('g').attr('transform', `translate(0, 470)`);
+const yAxis = svg.append('g').attr('transform', `translate(60, 0)`);
 
 
 // Part 2: define color and radius scales
