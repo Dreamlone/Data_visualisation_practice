@@ -88,13 +88,29 @@ loadData().then(data => {
 
 
         // Part 1, 2: create and update points
-        svg.selectAll('circle').data(data).enter().append('circle')
-          .attr("cx", d => x(d[xParam][year]))
-          .attr("cy", d => y(d[yParam][year]));
+        svg.selectAll('circle').data(data)
+            .enter()
+                .append('circle')
+                    .attr("r", 3.5)
+                    .attr("cx", d => x(d[xParam][year]))
+                    .attr("cy", d => y(d[yParam][year]));
 
         svg.selectAll('circle').data(data)
-          .attr("cx", d => x(d[xParam][year]))
-          .attr("cy", d => y(d[yParam][year]));
+            .attr("r", 3.5)
+            .attr("cx", d => x(d[xParam][year]))
+            .attr("cy", d => y(d[yParam][year]));
+
+        // Add the X Axis
+        svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+        // Add the Y Axis
+        svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
     }
 
     // draw a chart for the first time
