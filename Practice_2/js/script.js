@@ -78,12 +78,13 @@ loadData().then(data => {
         // change the domain of 'x', transform String to Number using '+'
         let xRange = data.map(d=> +d[xParam][year]);
         x.domain([d3.min(xRange), d3.max(xRange)]);
-
-        // call for axis
         xAxis.call(d3.axisBottom(x));
 
         // Part 1: create 'y axis' similary to 'x'
+        let yRange = data.map(d => +d[yParam][year]);
+        y.domain([d3.min(yRange), d3.max(yRange)]);
         yAxis.call(d3.axisLeft(y));
+
 
         // Part 2: change domain of new scale
         // ...
@@ -93,7 +94,13 @@ loadData().then(data => {
           .attr("cx", d => x(d[xParam][year]))
           .attr("cy", d => y(d[yParam][year]))
           .attr("r", d => r(d[radius][year]))
-          .style();
+          .style('fill', d => color(d['region']));
+
+        svg.selectAll('circle').data(data)
+          .attr("cx", d => x(d[xParam][year]))
+          .attr("cy", d => y(d[yParam][year]))
+          .attr("r", d => r(d[radius][year]))
+          .style('fill', d => color(d['region']));
     }
 
     // draw a chart for the first time
