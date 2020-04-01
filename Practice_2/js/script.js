@@ -90,13 +90,11 @@ loadData().then(data => {
         // Part 1, 2: create and update points
         svg.selectAll('circle').data(data).enter().append('circle')
           .attr("cx", d => x(d[xParam][year]))
-          .attr("cy", d => y(d[yParam][year]))
-          .attr("r", d => r(d[radius][year]));
+          .attr("cy", d => y(d[yParam][year]));
 
         svg.selectAll('circle').data(data)
           .attr("cx", d => x(d[xParam][year]))
-          .attr("cy", d => y(d[yParam][year]))
-          .attr("r", d => r(d[radius][year]));
+          .attr("cy", d => y(d[yParam][year]));
     }
 
     // draw a chart for the first time
