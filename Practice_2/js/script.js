@@ -22,10 +22,12 @@ const xLable = svg.append('text').attr('transform', `translate(${width/2}, ${hei
 const yLable = svg.append('text').attr('transform', `translate(${margin/2}, ${height/2}) rotate(-90)`);
 
 // Part 1: similar to rows above, set the 'transform' attribute for axis
-// Для отображения осей необходимо задать атрибут
+//
+//
 const xAxis = svg.append('g').attr('transform', `translate(${width/2}, ${height})`);
 const yAxis = svg.append('g').attr('transform', `translate(${margin/2}, ${height/2}) rotate(-90)`);
-
+//
+//
 
 // Part 2: define color and radius scales
 // const color = d3.scaleOrdinal()...
@@ -78,10 +80,10 @@ loadData().then(data => {
         x.domain([d3.min(xRange), d3.max(xRange)]);
 
         // call for axis
-        //xAxis.call(d3.axisBottom(x));
+        xAxis.call(d3.axisBottom(x));
 
         // Part 1: create 'y axis' similary to 'x'
-        // ...
+        yAxis.call(d3.axisLeft(y));
 
         // Part 2: change domain of new scale
         // ...
