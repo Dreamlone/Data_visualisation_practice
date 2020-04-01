@@ -17,17 +17,13 @@ const colors = ['aqua', 'lime', 'gold', 'hotpink']
 const x = d3.scaleLinear().range([margin*2, width-margin]);
 const y = d3.scaleLinear().range([height-margin, margin]);
 
-
 const xLable = svg.append('text').attr('transform', `translate(${width/2}, ${height})`);
 const yLable = svg.append('text').attr('transform', `translate(${margin/2}, ${height/2}) rotate(-90)`);
 
 // Part 1: similar to rows above, set the 'transform' attribute for axis
-//
-//
 const xAxis = svg.append('g').attr('transform', `translate(0, 470)`);
 const yAxis = svg.append('g').attr('transform', `translate(60, 0)`);
-//
-//
+
 
 // Part 2: define color and radius scales
 // const color = d3.scaleOrdinal()...
@@ -93,13 +89,11 @@ loadData().then(data => {
         svg.selectAll('circle').data(data).enter().append('circle')
           .attr("cx", d => x(d[xParam][year]))
           .attr("cy", d => y(d[yParam][year]))
-          .attr("r", d => r(d[radius][year]))
           .style('fill', d => color(d['region']));
 
         svg.selectAll('circle').data(data)
           .attr("cx", d => x(d[xParam][year]))
           .attr("cy", d => y(d[yParam][year]))
-          .attr("r", d => r(d[radius][year]))
           .style('fill', d => color(d['region']));
     }
 
