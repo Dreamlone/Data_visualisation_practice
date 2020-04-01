@@ -21,8 +21,8 @@ const xLable = svg.append('text').attr('transform', `translate(${width/2}, ${hei
 const yLable = svg.append('text').attr('transform', `translate(${margin/2}, ${height/2}) rotate(-90)`);
 
 // Part 1: similar to rows above, set the 'transform' attribute for axis
-const xAxis = svg.append('g').attr('transform', `translate(0, 470)`);
-const yAxis = svg.append('g').attr('transform', `translate(60, 0)`);
+const xAxis = svg.append('g').attr('transform', `translate(0, 500)`);
+const yAxis = svg.append('g').attr('transform', `translate(0, 70)`);
 
 
 // Part 2: define color and radius scales
@@ -83,17 +83,21 @@ loadData().then(data => {
 
 
         // Part 2: change domain of new scale
-        // ...
+        let rRange = data.map(d => +d[radius][year]);
+        r.domain([d3.min(rRange), d3.max(rRange)]);
+
 
         // Part 1, 2: create and update points
         svg.selectAll('circle').data(data).enter().append('circle')
           .attr("cx", d => x(d[xParam][year]))
           .attr("cy", d => y(d[yParam][year]))
+          .attr("r", d => r(d[radius][year]))
           .style('fill', d => color(d['region']));
 
         svg.selectAll('circle').data(data)
           .attr("cx", d => x(d[xParam][year]))
           .attr("cy", d => y(d[yParam][year]))
+          .attr("r", d => r(d[radius][year]))
           .style('fill', d => color(d['region']));
     }
 
