@@ -83,8 +83,8 @@ loadData().then(data => {
 
 
         // Part 2: change domain of new scale
-        let rRange = data.map(d => +d[radius][year]);
-        r.domain([d3.min(rRange), d3.max(rRange)]);
+        //let rRange = data.map(d => +d[radius][year]);
+        //r.domain([d3.min(rRange), d3.max(rRange)]);
 
 
         // Part 1, 2: create and update points
