@@ -92,13 +92,15 @@ loadData().then(data => {
           .attr("cx", d => x(d[xParam][year]))
           .attr("cy", d => y(d[yParam][year]))
           .attr("r", d => r(d[radius][year]))
-          .style('fill', d => color(d['region']));
+          .style('fill', d => color(d['region']))
+          .call(zoom);
 
         svg.selectAll('circle').data(data)
           .attr("cx", d => x(d[xParam][year]))
           .attr("cy", d => y(d[yParam][year]))
           .attr("r", d => r(d[radius][year]))
-          .style('fill', d => color(d['region']));
+          .style('fill', d => color(d['region']))
+          .call(zoom);
     }
 
     // draw a chart for the first time
