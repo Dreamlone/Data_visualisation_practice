@@ -24,7 +24,7 @@ const yLable = svg.append('text').attr('transform', `translate(${margin/2}, ${he
 // Part 1: similar to rows above, set the 'transform' attribute for axis
 //
 //
-const xAxis = svg.append('g').attr('transform', `translate(0, 500)`);
+const xAxis = svg.append('g').attr('transform', `translate(0, 470)`);
 const yAxis = svg.append('g').attr('transform', `translate(60, 0)`);
 //
 //
