@@ -24,8 +24,8 @@ const yLable = svg.append('text').attr('transform', `translate(${margin/2}, ${he
 // Part 1: similar to rows above, set the 'transform' attribute for axis
 //
 //
-const xAxis = svg.append('g').attr('transform');
-const yAxis = svg.append('g').attr('transform');
+const xAxis = svg.append('g').attr('transform', `translate(0, 500)`);
+const yAxis = svg.append('g').attr('transform', `translate(60, 0)`);
 //
 //
 
@@ -89,8 +89,7 @@ loadData().then(data => {
         // ...
 
         // Part 1, 2: create and update points
-        // svg.selectAll('circle').data(data)
-        //     ...
+        svg.selectAll('circle').data(data).enter().append('circle');
     }
 
     // draw a chart for the first time
