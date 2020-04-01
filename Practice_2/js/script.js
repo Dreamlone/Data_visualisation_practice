@@ -91,14 +91,12 @@ loadData().then(data => {
         svg.selectAll('circle').data(data).enter().append('circle')
           .attr("cx", d => x(d[xParam][year]))
           .attr("cy", d => y(d[yParam][year]))
-          .attr("r", d => r(d[radius][year]))
-          .style('fill');
+          .attr("r", d => r(d[radius][year]));
 
         svg.selectAll('circle').data(data)
           .attr("cx", d => x(d[xParam][year]))
           .attr("cy", d => y(d[yParam][year]))
-          .attr("r", d => r(d[radius][year]))
-          .style('fill');
+          .attr("r", d => r(d[radius][year]));
     }
 
     // draw a chart for the first time
