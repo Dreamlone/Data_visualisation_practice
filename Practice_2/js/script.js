@@ -21,23 +21,21 @@ const xLable = svg.append('text').attr('transform', `translate(${width/2}, ${hei
 const yLable = svg.append('text').attr('transform', `translate(${margin/2}, ${height/2}) rotate(-90)`);
 
 // Part 1: similar to rows above, set the 'transform' attribute for axis
-const xAxis = svg.append('g').attr('transform', `translate(0, 470)`);
-const yAxis = svg.append('g').attr('transform', `translate(60, 0)`);
-
+const xAxis = svg.append('g').attr('transform', 'translate(10, 470)');
+const yAxis = svg.append('g').attr('transform', 'translate(60, 0)');
 
 // Part 2: define color and radius scales
-// const color = d3.scaleOrdinal()...
-// const r = d3.scaleSqrt()...
+const color = d3.scaleOrdinal().range(colors);
+const r = d3.scaleSqrt().range([5, 20]);
 
 // Part 2: add options to select element http://htmlbook.ru/html/select
 // and add selected property for default value
 
-// d3.select('#radius').selectAll('option')
-//         ...
-
+d3.select('#radius').selectAll('option').attr('transform', 'translate(params)');
 
 // Part 3: similar to above, but for axis
-// ...
+d3.select('#x').selectAll('option').attr('transform', 'translate(params)');
+d3.select('#y').selectAll('option').attr('transform', 'translate(params)');
 
 
 loadData().then(data => {
@@ -46,9 +44,9 @@ loadData().then(data => {
 
     // Part 2: set a 'domain' for color scale
     // for that we need to get all unique values of regions field with 'd3.nest'
-
-    //let regions = d3.nest()...
-    //color.domain(regions);
+    var regions = d3.nest().key(function (d) {
+                        return d.color}).entries(data);
+    color.domain(regions);
 
     d3.select('.slider').on('change', newYear);
 
@@ -65,6 +63,8 @@ loadData().then(data => {
 
     function newRadius(){
         // Part 2: similar to 'newYear'
+        radius = this.value;
+        updateChart()
     }
     function updateChart(){
         xLable.text(xParam);
@@ -83,33 +83,24 @@ loadData().then(data => {
 
 
         // Part 2: change domain of new scale
-        //let rRange = data.map(d => +d[radius][year]);
-        //r.domain([d3.min(rRange), d3.max(rRange)]);
+        let rRange = data.map(d => +d[radius][year]);
+        r.domain([d3.min(rRange), d3.max(rRange)]);
 
 
         // Part 1, 2: create and update points
         svg.selectAll('circle').data(data)
             .enter()
                 .append('circle')
-                    .attr("r", 3.5)
                     .attr("cx", d => x(d[xParam][year]))
-                    .attr("cy", d => y(d[yParam][year]));
+                    .attr("cy", d => y(d[yParam][year]))
+                    .attr("r", d => r(d[radius][year]))
+                    .attr("fill", d => color(d['region']));
 
         svg.selectAll('circle').data(data)
-            .attr("r", 3.5)
             .attr("cx", d => x(d[xParam][year]))
-            .attr("cy", d => y(d[yParam][year]));
-
-        // Add the X Axis
-        svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
-
-        // Add the Y Axis
-        svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis);
+            .attr("cy", d => y(d[yParam][year]))
+            .attr("r", d => r(d[radius][year]))
+            .attr("fill", d => color(d['region']));
 
     }
 
