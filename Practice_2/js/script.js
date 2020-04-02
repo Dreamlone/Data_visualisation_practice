@@ -21,7 +21,7 @@ const xLable = svg.append('text').attr('transform', `translate(${width/2}, ${hei
 const yLable = svg.append('text').attr('transform', `translate(${margin/2}, ${height/2}) rotate(-90)`);
 
 // Part 1: similar to rows above, set the 'transform' attribute for axis
-const xAxis = svg.append('g').attr('transform', 'translate(10, 470)');
+const xAxis = svg.append('g').attr('transform', 'translate(0, 470)');
 const yAxis = svg.append('g').attr('transform', 'translate(60, 0)');
 
 // Part 2: define color and radius scales
@@ -34,8 +34,8 @@ const r = d3.scaleSqrt().range([5, 20]);
 d3.select('#radius').selectAll('option').attr('transform', 'translate(params)');
 
 // Part 3: similar to above, but for axis
-d3.select('#x').selectAll('option').attr('transform', 'translate(params)');
-d3.select('#y').selectAll('option').attr('transform', 'translate(params)');
+d3.select('#x').selectAll('option').attr('transform', 'translate(xAxis, xLable)');
+d3.select('#y').selectAll('option').attr('transform', 'translate(yAxis, yLable)');
 
 
 loadData().then(data => {
@@ -53,7 +53,8 @@ loadData().then(data => {
     d3.select('#radius').on('change', newRadius);
 
     // Part 3: subscribe to axis selectors change
-    // ...
+    d3.select('#x').on('change', newX);
+    d3.select('#y').on('change', newY);
 
     // change 'year' value
     function newYear(){
@@ -66,6 +67,19 @@ loadData().then(data => {
         radius = this.value;
         updateChart()
     }
+
+    function newX(){
+        // Part 2: similar to 'newYear'
+        xParam = this.value;
+        updateChart()
+    }
+
+    function newY(){
+        // Part 2: similar to 'newYear'
+        yParam = this.value;
+        updateChart()
+    }
+
     function updateChart(){
         xLable.text(xParam);
         yLable.text(yParam);
